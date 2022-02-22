@@ -28,10 +28,25 @@ export default function FriendForm(props) {
               Controlled inputs need `value` and `onChange` props.
               Inputs render what they're told - their current value comes from app state.
               At each keystroke, a change handler fires to change app state. */}
+          <input
+            name="username"
+            type="text"
+            placeholder="Type in a username ya chump!"
+            maxLength="30"
+            value={values.username}
+            onChange={onChange}
+          />
         </label>
 
         <label>Email
           {/* 🔥 STEP 4 - Make an input of type `email` or `text` for email. */}
+          <input
+            name="email"
+            type="email"
+            placeholder="Type in an email ya chump!"
+            value={values.email}
+            onChange={onChange}
+          />
         </label>
 
         {/* ////////// DROPDOWN ////////// */}
@@ -39,6 +54,12 @@ export default function FriendForm(props) {
         {/* ////////// DROPDOWN ////////// */}
         <label>Role
           {/* 🔥 STEP 5 - Make dropdown for role. */}
+          <select>
+            <option value="">-- Select a Role --</option>
+            <option value="Student">Student</option>
+            <option value="Instructor">Instructor</option>
+            <option value="Alumni">Alumni</option>
+          </select>
         </label>
 
         <div className='submit'>

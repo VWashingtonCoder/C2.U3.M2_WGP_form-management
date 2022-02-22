@@ -31,6 +31,12 @@ function SimpleForm() {
     }
     setPets(pets.concat(newPet));
     setFormValues(initialFormValues);
+
+    // axios.post("https://www.caseyharding.com", newPet)
+    //   .then(res => {
+    //     setPets(pets.concat(newPet));
+    //     setFormValues(initialFormValues);
+    //   })
   }
 
   return (
@@ -62,8 +68,8 @@ function SimpleForm() {
 
 render(
   <>
-    <SimpleForm />
-    {/* <App /> */}
+    {/* <SimpleForm /> */}
+    <App />
   </>
   , document.querySelector('#root')
 )
