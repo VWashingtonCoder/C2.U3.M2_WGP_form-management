@@ -17,6 +17,7 @@ export default function App() {
 
   // 🔥 STEP 1 - WE NEED STATE TO HOLD ALL VALUES OF THE FORM!
   const [formValues, setFormValues] = useState(initialFormValues); // fix this using the state hook
+  const [formErrors, setFormErrors] = useState(null);
 
   const updateForm = (inputName, inputValue) => {
     // 🔥 STEP 8 - IMPLEMENT a "form state updater" which will be used inside the inputs' `onChange` handler
@@ -30,11 +31,25 @@ export default function App() {
     //  b) prevent further action if either username or email or role is empty string after trimming
     //  c) POST new friend to backend, and on success update the list of friends in state with the new friend from API
     //  d) also on success clear the form
+
     const newFriend = {
       username: formValues.username.trim(),
       email: formValues.email.trim(),
       role: formValues.role
     }
+
+    if (!newFriend.username || !newFriend.email || !formValues.role) {
+      setFormErrors("DANGER DANGER WILL ROBINSON");
+      return;
+    }
+
+    axios.post("fakeapi.com", newFriend)
+      .then(res => {
+        console.log(res.data);
+        setFriends([res.data, ...friends]);
+        setFormValues(initialFormValues);
+        setFormErrors("");
+      }).catch(err => console.error(err))
   }
 
   useEffect(() => {
@@ -44,7 +59,7 @@ export default function App() {
   return (
     <div className='container'>
       <h1>Form App</h1>
-
+      { formErrors && <h2 className="error">{formErrors}</h2> }
       <FriendForm
         // 🔥 STEP 2 - The form component needs its props.
         //  Check implementation of FriendForm
